@@ -1,0 +1,14 @@
+[
+    {
+        "type"       : "db.kind",
+        "object"     : "com.webos.db.test:1",
+        "caller"     : "com.webos.db.test",
+        "operations" :
+        {
+            "create" : "allow",
+            "read"   : "allow",
+            "update" : "allow",
+            "delete" : "allow"
+        }
+    }
+]

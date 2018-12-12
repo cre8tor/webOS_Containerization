@@ -1,0 +1,17 @@
+# Install opkg, DB8 and their dependencies
+apt update
+apt install -y wget gcc libtool autoconf pkg-config libarchive13 libarchive-dev libcurl3 libcurl4-gnutls-dev libssl-dev libgpgme11-dev build-essential curl
+wget http://downloads.yoctoproject.org/releases/opkg/opkg-0.3.5.tar.gz
+tar xvzf opkg-0.3.5.tar.gz && cd opkg-0.3.5
+autoreconf -ivf && ./configure --prefix=/usr && make && make install
+mv opkg.conf > /etc/opkg.conf
+echo "alias opkg='opkg -f /etc/opkg.conf'" >> ~/.bashrc
+. ~/.bashrc
+opkg update && opkg install --nodeps libicui18n57 libicuuc57 libicudata57 libleveldb1 libpmloglib3 libsnappy1 libboost-regex1.61.0 libpbnjson libyajl2 db8
+apt update && apt install -y liburiparser1
+opkg --dest opt install libstdc++6
+cp /opt/usr/lib/libstdc++.so.6.0.22 /usr/lib/arm-linux-gnueabihf/
+cd /usr/lib/arm-linux-gnueabihf/
+rm libstdc++.so.6
+ln -s libstdc++.so.6.0.22 libstdc++.so.6
+
