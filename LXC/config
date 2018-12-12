@@ -1,0 +1,31 @@
+# Template used to create this container: /usr/share/lxc/templates/lxc-download
+# Parameters passed to the template:
+# For additional config options, please look at lxc.container.conf(5)
+
+# Uncomment the following line to support nesting containers:
+#lxc.include = /usr/share/lxc/config/nesting.conf
+# (Be aware this has security implications)
+
+
+# Distribution configuration
+lxc.include = /usr/share/lxc/config/common.conf
+
+# For Ubuntu 14.04
+lxc.mount.entry = /sys/kernel/debug sys/kernel/debug none bind,optional 0 0
+lxc.mount.entry = /sys/kernel/security sys/kernel/security none bind,optional 0 0
+lxc.mount.entry = /sys/fs/pstore sys/fs/pstore none bind,optional 0 0
+lxc.mount.entry = mqueue dev/mqueue mqueue rw,relatime,create=dir,optional 0 0
+lxc.arch = linux32
+
+# Container specific configuration
+lxc.rootfs.path = dir:/usr/var/lib/lxc/db8_container/rootfs
+lxc.mount.entry = /luna luna none rw,bind,create=dir 0.0
+lxc.mount.entry = /run/luna-service2 run/luna-service2 none rw,bind,create=dir 0.0
+lxc.uts.name = db8_container
+
+# Network configuration
+lxc.net.0.type = none
+#lxc.net.0.flags = up
+#lxc.net.0.name = eth0
+#lxc.net.0.ipv4 = 192.168.10.101/24
+#lxc.net.0.ipv4.gateway = 192.168.10.100
