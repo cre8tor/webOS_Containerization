@@ -64,6 +64,25 @@ lxc-start.service</code></pre>
 ## 6. 성능 측정 어플리케이션
 `performance_test_app` 디렉토리에는 성능 측정을 위한 테스트 어플리케이션(ipk)과 소스코드가 있다.
 ipk 파일을 opkg 로 webOS 에 설치할 수 있다.
+
+`src` 에는 다음의 디렉토리가 있다.
+`DB8_testApp`: 소스코드
+`sampleApp`: 패키징된 어플리케이션
+
+다음은 DB8_testApp 의 소스코드를 패키징하여 최종적으로 ipk 파일을 생성하는 절차이다.
+
+1. DB8_testApp 경로에서 다음의 명령어로 enact 패키지를 생성할 수 있다.
+<pre><code>npm install @enact/webos --save
+enact pack -p</code></pre>
+
+2. Ares Command Line Interface 를 이용하여 다음의 명령어로 sampleApp 을 만든다.
+<pre><code>ares-generate sampleApp</code></pre>
+
+3. DB8_testApp/dist 경로에 있는 모든 파일을 sampleApp 경로에 복사한다.
+(이 단계에서의 sampleApp(ipk 파일 생성전)이 src 에 있는 `sampleApp` 이다)
+
+4. sampleApp 디렉토리에서 벗어나서 다음의 명령어로 ipk 파일을 생성한다.
+<pre><code>ares-package -p sampleApp</code></pre>
 #
 ## 7. webOS 개발 이미지
-지금까지 한 작업들이 모두 포함된 webOS 개발 이미지이다.
+지금까지 한 작업들이 모두 포함된 라즈베리파이 3b webOS 개발 이미지이다.
