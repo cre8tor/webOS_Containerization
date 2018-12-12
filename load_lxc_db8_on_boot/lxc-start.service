@@ -1,0 +1,7 @@
+[Unit]
+Requires=ls-hubd.service
+After=ls-hubd.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/lxc-start -F -n db8_container
